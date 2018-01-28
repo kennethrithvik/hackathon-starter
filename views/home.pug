@@ -7,6 +7,10 @@ block content
   .row
     .col-sm-6
       h2 Account Balance
-      p S$
+      if !user
+          p Please Login for balance
+      else
+          p="S$ "+user.profile.balance
+
       p
         a.btn.btn-default(href='#', role='button') View details »
