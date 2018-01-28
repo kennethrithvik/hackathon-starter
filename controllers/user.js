@@ -182,6 +182,35 @@ exports.postUpdatePassword = (req, res, next) => {
 };
 
 /**
+ * POST /account/balance
+ * update balance.
+ */
+exports.postUpdateBalance = (req, res, next) => {
+  // req.assert('password', 'Password must be at least 4 characters long').len(4);
+  // req.assert('confirmPassword', 'Passwords do not match').equals(req.body.password);
+
+  /* const errors = req.validationErrors();
+
+  if (errors) {
+    req.flash('errors', errors);
+    return res.redirect('/account');
+  } */
+
+  User.findById(req.user.id, (err, user) => {
+    if (err) { return next(err); }
+    // user.profile.balance -= parseInt(req.body.cost, 10);
+    user.profile.balance -= 6.60;
+    if (user.profile.balance < 0)user.profile.balance = 0;
+    user.save((err) => {
+      if (err) { return next(err); }
+      req.flash('success', { msg: 'Order Succesful' });
+      res.redirect('/');
+    });
+  });
+};
+
+
+/**
  * POST /account/delete
  * Delete user account.
  */

@@ -12,5 +12,11 @@ block content
       else
           p="S$ "+user.profile.balance
 
-      p
-        a.btn.btn-default(href='#', role='button') View details »
+     
+    form.form-horizontal(action='/account/balance', method='POST')
+     input(type='hidden', name='_csrf', value=_csrf) 
+     .form-group
+       .col-sm-offset-3.col-sm-4
+         button.btn.btn-primary(type='submit',autofocus)
+           i.fa
+           | Refresh
